@@ -1,0 +1,36 @@
+<%- include('header') %>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+   <div class="container-fluid">
+      <a class="navbar-brand" href="/">PostIt</a>
+   </div>
+</nav>
+<div class="container">
+   <div class="row formulario">
+      <form method="POST">
+         <div class="mb-3">
+            <label class="form-label">Titulo da Nota:</label>
+            <input type="text" class="form-control" name="titulo" maxlength="20">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Descrição da Nota:</label>
+            <textarea class="form-control" name="descricao" rows="2" maxlength="136"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Cor da Nota:</label>
+            
+            <select class="form-select" name="cor">
+               <option value="#ff65a3" selected class="hotpink">Hot Pink</option>
+               <option value="#7afcff" class="aquamarine">Aquamarine</option>
+               <option value="#fff740" class="gorse">Gorse</option>
+             </select>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary">Salvar Nota</button>
+          </div>
+     </form>
+   </div>
+</div>
+<%- include('footer') %>

@@ -7,8 +7,16 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 const path = require ("path");
 
-const sqlite = require ('sqlite');
-const dbConnection = sqlite.open(path.resolve(__dirname, 'bd.sqlite'), { Promise });
+const sqlite = require('sqlite')
+const sqlite3 = require('sqlite3')
+
+async function openDb() {
+  return sqlite.open({
+    filename: 'bd.sqlite',
+    driver: sqlite3.Database,
+  });
+}
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -16,7 +24,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async (req, res) => {
-    const db = await dbConnection
+    const db = await openDb()
     const notas = await db.all('select * from notas')
     res.render('home', {notas})
 })
@@ -27,13 +35,13 @@ app.get('/nova_anotacao', (req, res) => {
 
 app.post('/nova_anotacao', async (req, res) => {
     const { titulo, descricao, cor } = req.body
-    const db = await dbConnection
+    const db = await openDb()
     await db.run(`insert into notas(titulo, descricao, cor) values ('${titulo}', '${descricao}', '${cor}')`)
     res.redirect ('/')
 });
 
 app.get('/delete/:id', async(req, res) => {
-    const db = await dbConnection
+    const db = await openDb()
     const id = req.params.id
     await db.run(`delete from notas where id = ${id}`)
     res.redirect('/')
@@ -41,7 +49,7 @@ app.get('/delete/:id', async(req, res) => {
 })
 
 const init = async() => {
-    const db = await dbConnection
+    const db = await openDb()
     await db.run('create table if not exists notas (id INTEGER PRIMARY KEY, titulo TEXT, descricao TEXT, cor TEXT);')
 };
 init();

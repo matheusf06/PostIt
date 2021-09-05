@@ -1,21 +1,20 @@
 {
-  "name": "postit",
+  "name": "teste",
   "version": "1.0.0",
-  "description": "Aplicativo de bloco de notas",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "postit",
-    "bloco_de_notas"
-  ],
-  "author": "Matheus F.",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "sqlite": "3.0.3"
+    "multer": "^1.4.3",
+    "sqlite": "^4.0.23",
+    "sqlite3": "^5.0.2"
   }
 }
